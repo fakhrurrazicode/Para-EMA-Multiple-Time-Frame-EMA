@@ -1,0 +1,35 @@
+//@version=3
+study("Para EMA + Multiple Time Frame EMA", overlay=true)
+
+lenEMA1=input(20, title = "Exponential Moving Average 1")
+lenEMA2=input(50, title = "Exponential Moving Average 2")
+lenEMA3=input(100, title = "Exponential Moving Average 3")
+lenEMA4=input(200, title = "Exponential Moving Average 4")
+
+price = close
+
+EMA1=ema(close, lenEMA1)
+EMA2=ema(close, lenEMA2)
+EMA3=ema(close, lenEMA3)
+EMA4=ema(close, lenEMA4)
+
+
+plot(EMA1, "Para EMA 1", linewidth=2, color=lime)
+plot(EMA2, "Para EMA 2", linewidth=2, color=blue)
+plot(EMA3, "Para EMA 3", linewidth=2, color=yellow)
+plot(EMA4, "Para EMA 4", linewidth=2, color=white)
+
+
+ma_len=input(9,"EMA Multiple Time Frame parameter", integer)
+
+out1= security(tickerid, "W", ema(close, ma_len))
+out2= security(tickerid, "D", ema(close, ma_len))
+out3= security(tickerid, "240", ema(close, ma_len))
+out4= security(tickerid, "60", ema(close, ma_len))
+
+lnwd=2
+
+plot(out1,"Multiple Time Frame EMA Weekly",#FF0000,transp=0,linewidth=lnwd)
+plot(out2,"Multiple Time Frame EMA Daily",#FF0000,transp=0,linewidth=lnwd)
+plot(out3,"Multiple Time Frame EMA 4 Hours",#FF0000,transp=0,linewidth=lnwd)
+plot(out4,"Multiple Time Frame EMA 1 Hour",#FF0000,transp=0,linewidth=lnwd)
